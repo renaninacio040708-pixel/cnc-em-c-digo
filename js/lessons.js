@@ -779,19 +779,612 @@ while (i <= 5) {
         explain: "continue pula o restante do bloco atual e vai direto pra próxima volta do loop."
       }
     ]
+  },
+
+  {
+    id: 13,
+    chapterRef: "1:06:54 e 1:15:38 no vídeo — “shopping cart” + “mad libs”",
+    title: "Projetos: carrinho & mad libs",
+    icon: "🛒",
+    intro: `
+      <p>Pra ler uma palavra (sem espaço) digitada pelo usuário, usamos <code>%s</code> com
+      um vetor de char — e, diferente de int/float, <b>não</b> usamos <code>&amp;</code>:</p>
+      <pre><code>char produto[50];
+scanf("%s", produto);</code></pre>
+      <p>Esses projetos do curso combinam scanf, variáveis e contas — exatamente o que você
+      já aprendeu, só juntando as peças.</p>`,
+    phases: [
+      {
+        type: "code",
+        instruction: "Declare um vetor de char chamado produto (tamanho 50) e leia o nome digitado com scanf.",
+        context_before: "#include <stdio.h>\n\nint main() {",
+        seed: "",
+        target: '    char produto[50];\n    scanf("%s", produto);',
+        context_after: "\n    return 0;\n}",
+        expectedOutput: null,
+        hint: "Vetores já são um endereço — não precisa de & antes de produto."
+      },
+      {
+        type: "code",
+        instruction: "Calcule e imprima o total: preco vezes qtd, com 2 casas decimais.",
+        context_before: "#include <stdio.h>\n\nint main() {\n    float preco = 25.5;\n    int qtd = 3;",
+        seed: "",
+        target: '    printf("%.2f", preco * qtd);',
+        context_after: "\n    return 0;\n}",
+        expectedOutput: "76.50",
+        hint: "printf(\"%.2f\", preco * qtd);"
+      },
+      {
+        type: "code",
+        instruction: "Aplique 10% de desconto no total (multiplique o resultado por 0.9).",
+        context_before: "#include <stdio.h>\n\nint main() {\n    float preco = 25.5;\n    int qtd = 3;",
+        seed: '    printf("%.2f", preco * qtd);',
+        target: '    printf("%.2f", preco * qtd * 0.9);',
+        context_after: "\n    return 0;\n}",
+        expectedOutput: "68.85",
+        hint: "Só multiplica a expressão inteira por 0.9 a mais."
+      },
+      {
+        type: "mcq",
+        q: "Qual especificador lemos com scanf para capturar uma palavra (sem espaços)?",
+        options: ["%s", "%c", "%d", "%f"],
+        answer: 0,
+        hint: "s de 'string'.",
+        explain: "%s lê uma sequência de caracteres até encontrar um espaço."
+      }
+    ]
+  },
+
+  {
+    id: 14,
+    chapterRef: "1:25:25 a 1:36:44 no vídeo — “math functions”, “circle calculator”, “compound interest”",
+    title: "Funções matemáticas & calculadoras",
+    icon: "🧮",
+    intro: `
+      <p>A biblioteca <code>&lt;math.h&gt;</code> traz funções matemáticas prontas:</p>
+      <pre><code>#include &lt;math.h&gt;
+
+sqrt(16)     // raiz quadrada -> 4
+pow(2, 5)    // potencia (2 elevado a 5) -> 32</code></pre>`,
+    phases: [
+      {
+        type: "code",
+        instruction: "Imprima a raiz quadrada de 16, sem casas decimais (%.0f).",
+        context_before: "#include <stdio.h>\n#include <math.h>\n\nint main() {",
+        seed: "",
+        target: '    printf("%.0f", sqrt(16));',
+        context_after: "\n    return 0;\n}",
+        expectedOutput: "4",
+        hint: "sqrt(numero) calcula a raiz quadrada."
+      },
+      {
+        type: "code",
+        instruction: "Imprima 2 elevado a 5, usando pow, sem casas decimais.",
+        context_before: "#include <stdio.h>\n#include <math.h>\n\nint main() {",
+        seed: "",
+        target: '    printf("%.0f", pow(2, 5));',
+        context_after: "\n    return 0;\n}",
+        expectedOutput: "32",
+        hint: "pow(base, expoente)."
+      },
+      {
+        type: "code",
+        instruction: "Calcule a área de um círculo (3.14159 * raio * raio) e imprima com 2 casas decimais.",
+        context_before: "#include <stdio.h>\n\nint main() {\n    float raio = 5;",
+        seed: "",
+        target: '    printf("%.2f", 3.14159 * raio * raio);',
+        context_after: "\n    return 0;\n}",
+        expectedOutput: "78.54",
+        hint: "Área = pi * raio * raio."
+      },
+      {
+        type: "code",
+        instruction: "Mude o raio de 5 para 10 (a conta da área continua igual).",
+        context_before: "#include <stdio.h>\n\nint main() {",
+        seed: "    float raio = 5;",
+        target: "    float raio = 10;",
+        context_after: '\n    printf("%.2f", 3.14159 * raio * raio);\n    return 0;\n}',
+        expectedOutput: "314.16",
+        hint: "Só o número depois do = muda."
+      },
+      {
+        type: "mcq",
+        q: "Qual biblioteca precisamos incluir pra usar sqrt e pow?",
+        options: ["<math.h>", "<stdio.h>", "<stdlib.h>", "<calc.h>"],
+        answer: 0,
+        hint: "math de 'matemática'.",
+        explain: "<math.h> traz as funções matemáticas como sqrt, pow, entre outras."
+      }
+    ]
+  },
+
+  {
+    id: 15,
+    chapterRef: "3:40:00 a 4:21:11 no vídeo — “random numbers”, jogos e “banking program”",
+    title: "Números aleatórios & jogos",
+    icon: "🎲",
+    intro: `
+      <p><code>rand()</code> (de <code>&lt;stdlib.h&gt;</code>) gera um número pseudo-aleatório.
+      Usamos <code>%</code> pra limitar a faixa:</p>
+      <pre><code>rand() % 10        // 0 a 9
+rand() % 6 + 1     // 1 a 6 (dado)</code></pre>
+      <p><code>srand(time(NULL))</code>, chamado uma vez no início do programa, garante que os
+      números mudem a cada execução (senão rand() sempre repete a mesma sequência).</p>`,
+    phases: [
+      {
+        type: "code",
+        instruction: "Guarde em numero um valor aleatório de 0 a 9, usando rand().",
+        context_before: "#include <stdio.h>\n#include <stdlib.h>\n\nint main() {",
+        seed: "",
+        target: "    int numero = rand() % 10;",
+        context_after: "\n    return 0;\n}",
+        expectedOutput: null,
+        hint: "rand() % 10 dá um resto entre 0 e 9."
+      },
+      {
+        type: "code",
+        instruction: "Simule uma jogada de dado: guarde em dado um valor de 1 a 6.",
+        context_before: "#include <stdio.h>\n#include <stdlib.h>\n\nint main() {",
+        seed: "",
+        target: "    int dado = rand() % 6 + 1;",
+        context_after: "\n    return 0;\n}",
+        expectedOutput: null,
+        hint: "Some +1 no final pra começar do 1 em vez do 0."
+      },
+      {
+        type: "code",
+        instruction: "Adicione srand(time(NULL)); logo no início do main, antes de gerar o número.",
+        context_before: "#include <stdio.h>\n#include <stdlib.h>\n#include <time.h>\n\nint main() {",
+        seed: "",
+        target: "    srand(time(NULL));",
+        context_after: "\n    int numero = rand() % 10;\n    return 0;\n}",
+        expectedOutput: null,
+        hint: "srand precisa vir ANTES de qualquer chamada a rand()."
+      },
+      {
+        type: "mcq",
+        q: "rand() % 10 gera números em qual faixa?",
+        options: ["0 a 9", "1 a 10", "0 a 10", "1 a 9"],
+        answer: 0,
+        hint: "% devolve o resto, que nunca chega no divisor.",
+        explain: "O resto de qualquer número dividido por 10 vai de 0 a 9."
+      },
+      {
+        type: "mcq",
+        q: "Para que serve srand(time(NULL))?",
+        options: [
+          "Muda a semente aleatória a cada execução, usando o horário atual",
+          "Gera sempre o mesmo número",
+          "Não faz nada",
+          "Só funciona com float"
+        ],
+        answer: 0,
+        hint: "time(NULL) muda a cada segundo.",
+        explain: "Sem srand, rand() sempre gera a mesma sequência de números toda vez que o programa roda."
+      }
+    ]
+  },
+
+  {
+    id: 16,
+    chapterRef: "4:21:11 a 5:13:50 no vídeo — “arrays”, “2D arrays”, “arrays of strings”",
+    title: "Vetores (arrays)",
+    icon: "📊",
+    intro: `
+      <p>Um vetor guarda vários valores do mesmo tipo, acessados por índice (começando em 0):</p>
+      <pre><code>int notas[3] = {10, 8, 6};
+printf("%d", notas[1]); // 8</code></pre>
+      <p>Uma matriz (array 2D) é um vetor de vetores: <code>int grade[2][2]</code>. E um vetor
+      de strings é um vetor de vetores de char: <code>char nomes[3][20]</code>.</p>`,
+    phases: [
+      {
+        type: "code",
+        instruction: "Declare um vetor de 3 inteiros chamado notas, com valores 10, 8 e 6.",
+        context_before: "#include <stdio.h>\n\nint main() {",
+        seed: "",
+        target: "    int notas[3] = {10, 8, 6};",
+        context_after: "\n    return 0;\n}",
+        expectedOutput: null,
+        hint: "tipo nome[tamanho] = {valores};"
+      },
+      {
+        type: "code",
+        instruction: "Imprima o SEGUNDO valor do vetor notas (índice 1).",
+        context_before: "#include <stdio.h>\n\nint main() {\n    int notas[3] = {10, 8, 6};",
+        seed: "",
+        target: '    printf("%d", notas[1]);',
+        context_after: "\n    return 0;\n}",
+        expectedOutput: "8",
+        hint: "O índice 0 é o primeiro elemento (10); índice 1 é o segundo."
+      },
+      {
+        type: "code",
+        instruction: "Use um for para imprimir TODOS os elementos do vetor notas, em sequência.",
+        context_before: "#include <stdio.h>\n\nint main() {\n    int notas[3] = {10, 8, 6};",
+        seed: "",
+        target: '    for (int i = 0; i < 3; i++) {\n        printf("%d", notas[i]);\n    }',
+        context_after: "\n    return 0;\n}",
+        expectedOutput: "1086",
+        hint: "notas[i] muda de valor a cada volta do loop."
+      },
+      {
+        type: "code",
+        instruction: "Complete o for que lê 3 números digitados pelo usuário e guarda em idades[i].",
+        context_before: "#include <stdio.h>\n\nint main() {\n    int idades[3];",
+        seed: "",
+        target: '    for (int i = 0; i < 3; i++) {\n        scanf("%d", &idades[i]);\n    }',
+        context_after: "\n    return 0;\n}",
+        expectedOutput: null,
+        hint: "Usa & antes de idades[i] — cada posição é um int comum."
+      },
+      {
+        type: "code",
+        instruction: "Declare uma matriz 2x2 chamada grade, com os valores {{1, 2}, {3, 4}}.",
+        context_before: "#include <stdio.h>\n\nint main() {",
+        seed: "",
+        target: "    int grade[2][2] = {{1, 2}, {3, 4}};",
+        context_after: "\n    return 0;\n}",
+        expectedOutput: null,
+        hint: "int nome[linhas][colunas] = {{...}, {...}};"
+      },
+      {
+        type: "code",
+        instruction: "Imprima o elemento da linha 1, coluna 0 da matriz grade.",
+        context_before: "#include <stdio.h>\n\nint main() {\n    int grade[2][2] = {{1, 2}, {3, 4}};",
+        seed: "",
+        target: '    printf("%d", grade[1][0]);',
+        context_after: "\n    return 0;\n}",
+        expectedOutput: "3",
+        hint: "grade[linha][coluna] — linha 1 é a segunda linha: {3, 4}."
+      },
+      {
+        type: "code",
+        instruction: 'Declare um vetor de 3 strings chamado nomes (tamanho 20 cada), com "Ana", "Bia" e "Caio".',
+        context_before: "#include <stdio.h>\n\nint main() {",
+        seed: "",
+        target: 'char nomes[3][20] = {"Ana", "Bia", "Caio"};',
+        context_after: "\n    return 0;\n}",
+        expectedOutput: null,
+        hint: "char nome[QUANTAS][TAMANHO_MAXIMO] = {...};"
+      },
+      {
+        type: "code",
+        instruction: "Imprima o segundo nome do vetor nomes, usando %s.",
+        context_before: '#include <stdio.h>\n\nint main() {\n    char nomes[3][20] = {"Ana", "Bia", "Caio"};',
+        seed: "",
+        target: '    printf("%s", nomes[1]);',
+        context_after: "\n    return 0;\n}",
+        expectedOutput: "Bia",
+        hint: "%s imprime a string inteira daquela posição."
+      }
+    ]
+  },
+
+  {
+    id: 17,
+    chapterRef: "5:13:50 a 5:48:08 no vídeo — “ternary operator” + “structs”",
+    title: "Structs",
+    icon: "⚙️",
+    intro: `
+      <p>Uma struct agrupa vários valores relacionados num só tipo:</p>
+      <pre><code>struct Peca {
+    float diametro;
+    int rotacao;
+};
+
+struct Peca p1;
+p1.diametro = 25.4;</code></pre>
+      <p>Bônus — o operador ternário resume um if/else numa linha:
+      <code>condicao ? valorSeVerdadeiro : valorSeFalso</code>.</p>`,
+    phases: [
+      {
+        type: "code",
+        instruction: "Declare uma struct chamada Peca, com dois campos: float diametro e int rotacao.",
+        context_before: "#include <stdio.h>\n\n",
+        seed: "",
+        target: "struct Peca {\n    float diametro;\n    int rotacao;\n};",
+        context_after: "\n\nint main() {\n    return 0;\n}",
+        expectedOutput: null,
+        hint: "struct Nome {\n    tipo campo1;\n    tipo campo2;\n};"
+      },
+      {
+        type: "code",
+        instruction: "Crie uma variável p1 do tipo struct Peca, e defina diametro como 25.4.",
+        context_before: "#include <stdio.h>\n\nstruct Peca {\n    float diametro;\n    int rotacao;\n};\n\nint main() {",
+        seed: "",
+        target: "    struct Peca p1;\n    p1.diametro = 25.4;",
+        context_after: "\n    return 0;\n}",
+        expectedOutput: null,
+        hint: "struct Peca p1; depois p1.diametro = valor;"
+      },
+      {
+        type: "code",
+        instruction: "Imprima o valor de p1.diametro, com 1 casa decimal.",
+        context_before: "#include <stdio.h>\n\nstruct Peca {\n    float diametro;\n    int rotacao;\n};\n\nint main() {\n    struct Peca p1;\n    p1.diametro = 25.4;",
+        seed: "",
+        target: '    printf("%.1f", p1.diametro);',
+        context_after: "\n    return 0;\n}",
+        expectedOutput: "25.4",
+        hint: "Acesse o campo com o ponto: p1.diametro"
+      },
+      {
+        type: "code",
+        instruction: "Mude o diâmetro de 25.4 para 30.0.",
+        context_before: "#include <stdio.h>\n\nstruct Peca {\n    float diametro;\n    int rotacao;\n};\n\nint main() {\n    struct Peca p1;",
+        seed: "    p1.diametro = 25.4;",
+        target: "    p1.diametro = 30.0;",
+        context_after: '\n    printf("%.1f", p1.diametro);\n    return 0;\n}',
+        expectedOutput: "30.0",
+        hint: "Só o número depois do = muda."
+      },
+      {
+        type: "code",
+        instruction: 'Use o operador ternário para imprimir "Par" se num for par, ou "Impar" caso contrário, em uma linha só.',
+        context_before: "#include <stdio.h>\n\nint main() {\n    int num = 8;",
+        seed: "",
+        target: '    printf(num % 2 == 0 ? "Par" : "Impar");',
+        context_after: "\n    return 0;\n}",
+        expectedOutput: "Par",
+        hint: "condicao ? valorSeVerdadeiro : valorSeFalso"
+      },
+      {
+        type: "mcq",
+        q: "O que uma struct agrupa?",
+        options: ["Vários valores relacionados num só tipo", "Só funções", "Só texto", "Nada, é decorativo"],
+        answer: 0,
+        hint: "Pense numa 'ficha' com vários campos.",
+        explain: "struct empacota campos de tipos diferentes (float, int, char...) sob um único nome de tipo."
+      }
+    ]
+  },
+
+  {
+    id: 18,
+    chapterRef: "5:54:48 no vídeo — “pointers”",
+    title: "Ponteiros",
+    icon: "📍",
+    intro: `
+      <p>Um ponteiro guarda o <b>endereço de memória</b> de uma variável, não o valor
+      direto:</p>
+      <pre><code>int x = 10;
+int *p = &x;      // p guarda o ENDERECO de x
+printf("%d", *p); // *p acessa o VALOR (10)</code></pre>
+      <p>Alterar <code>*p</code> altera <code>x</code> de verdade, porque os dois apontam pro
+      mesmo lugar na memória.</p>`,
+    phases: [
+      {
+        type: "code",
+        instruction: "Declare um ponteiro p que guarda o endereço de x.",
+        context_before: "#include <stdio.h>\n\nint main() {\n    int x = 10;",
+        seed: "",
+        target: "    int *p = &x;",
+        context_after: "\n    return 0;\n}",
+        expectedOutput: null,
+        hint: "tipo *nome = &variavel;"
+      },
+      {
+        type: "code",
+        instruction: "Imprima o valor apontado por p (não o endereço — o valor).",
+        context_before: "#include <stdio.h>\n\nint main() {\n    int x = 10;\n    int *p = &x;",
+        seed: "",
+        target: '    printf("%d", *p);',
+        context_after: "\n    return 0;\n}",
+        expectedOutput: "10",
+        hint: "*p (com asterisco) acessa o valor guardado no endereço."
+      },
+      {
+        type: "code",
+        instruction: "Através do ponteiro p, mude o valor de x para 20 (sem usar x diretamente).",
+        context_before: "#include <stdio.h>\n\nint main() {\n    int x = 10;\n    int *p = &x;",
+        seed: "",
+        target: "    *p = 20;",
+        context_after: '\n    printf("%d", x);\n    return 0;\n}',
+        expectedOutput: "20",
+        hint: "*p = novoValor; altera quem p aponta."
+      },
+      {
+        type: "mcq",
+        q: "O que * faz na frente de um ponteiro (fora da declaração)?",
+        options: [
+          "Acessa/altera o valor pro qual o ponteiro aponta (dereference)",
+          "Multiplica o ponteiro por 1",
+          "Cria um novo ponteiro",
+          "Apaga o ponteiro da memória"
+        ],
+        answer: 0,
+        hint: "É o oposto de &.",
+        explain: "*p 'desreferencia' o ponteiro — acessa o valor guardado no endereço que ele aponta."
+      },
+      {
+        type: "mcq",
+        q: "O que int *p = &x; guarda dentro de p?",
+        options: ["O endereço de memória de x", "O valor de x", "Um texto", "Nada"],
+        answer: 0,
+        hint: "& é 'endereço de'.",
+        explain: "p não guarda o valor de x — guarda ONDE x está na memória."
+      }
+    ]
+  },
+
+  {
+    id: 19,
+    chapterRef: "6:02:55 e 6:08:50 no vídeo — “write files” + “read files”",
+    title: "Arquivos",
+    icon: "📁",
+    intro: `
+      <p>Pra trabalhar com arquivos, usamos <code>FILE*</code>:</p>
+      <pre><code>FILE *arquivo = fopen("dados.txt", "w"); // w = escrever
+fprintf(arquivo, "%d", 42);              // funciona como printf
+fclose(arquivo);                         // sempre feche no final</code></pre>
+      <p>Pra ler, trocamos o modo pra <code>"r"</code> e usamos <code>fscanf</code> no lugar
+      de <code>fprintf</code>.</p>`,
+    phases: [
+      {
+        type: "code",
+        instruction: 'Abra o arquivo "dados.txt" em modo de escrita ("w"), guardando em arquivo.',
+        context_before: "#include <stdio.h>\n\nint main() {",
+        seed: "",
+        target: '    FILE *arquivo = fopen("dados.txt", "w");',
+        context_after: "\n    fclose(arquivo);\n    return 0;\n}",
+        expectedOutput: null,
+        hint: 'FILE *nome = fopen("caminho", "modo");'
+      },
+      {
+        type: "code",
+        instruction: "Escreva o número 42 dentro do arquivo, usando fprintf.",
+        context_before: '#include <stdio.h>\n\nint main() {\n    FILE *arquivo = fopen("dados.txt", "w");',
+        seed: "",
+        target: '    fprintf(arquivo, "%d", 42);',
+        context_after: "\n    fclose(arquivo);\n    return 0;\n}",
+        expectedOutput: null,
+        hint: "fprintf funciona como printf, só que o primeiro argumento é o arquivo."
+      },
+      {
+        type: "code",
+        instruction: 'Troque "w" (escrever) por "r" (ler), pra abrir o arquivo em modo leitura.',
+        context_before: "#include <stdio.h>\n\nint main() {",
+        seed: '    FILE *arquivo = fopen("dados.txt", "w");',
+        target: '    FILE *arquivo = fopen("dados.txt", "r");',
+        context_after: "\n    fclose(arquivo);\n    return 0;\n}",
+        expectedOutput: null,
+        hint: "Só a letra dentro das aspas do modo muda."
+      },
+      {
+        type: "mcq",
+        q: "Por que sempre chamamos fclose no final?",
+        options: [
+          "Libera o arquivo e garante que os dados foram salvos de verdade",
+          "É opcional, nunca muda nada",
+          "Apaga o arquivo",
+          "Renomeia o arquivo"
+        ],
+        answer: 0,
+        hint: "Sem fechar, dados podem ficar 'presos' e não serem gravados.",
+        explain: "fclose libera o recurso do sistema operacional e garante que tudo que foi escrito é salvo no disco."
+      }
+    ]
+  },
+
+  {
+    id: 20,
+    chapterRef: "6:15:14 a 6:31:33 no vídeo — “malloc”, “calloc”, “realloc”",
+    title: "malloc / calloc / realloc",
+    icon: "🧠",
+    intro: `
+      <p>Essas funções (de <code>&lt;stdlib.h&gt;</code>) pedem memória "sob demanda", em
+      tempo de execução:</p>
+      <pre><code>int *numeros = malloc(5 * sizeof(int));  // 5 inteiros, memoria "suja"
+int *zeros = calloc(5, sizeof(int));     // 5 inteiros, ja zerados
+free(numeros);                           // sempre libere depois</code></pre>`,
+    phases: [
+      {
+        type: "code",
+        instruction: "Aloque memória dinâmica pra 5 inteiros, usando malloc, guardando em numeros.",
+        context_before: "#include <stdio.h>\n#include <stdlib.h>\n\nint main() {",
+        seed: "",
+        target: "    int *numeros = malloc(5 * sizeof(int));",
+        context_after: "\n    free(numeros);\n    return 0;\n}",
+        expectedOutput: null,
+        hint: "malloc(quantidade * sizeof(tipo))"
+      },
+      {
+        type: "code",
+        instruction: "Guarde 100 na primeira posição de numeros, e imprima esse valor.",
+        context_before: "#include <stdio.h>\n#include <stdlib.h>\n\nint main() {\n    int *numeros = malloc(5 * sizeof(int));",
+        seed: "",
+        target: '    numeros[0] = 100;\n    printf("%d", numeros[0]);',
+        context_after: "\n    free(numeros);\n    return 0;\n}",
+        expectedOutput: "100",
+        hint: "Memória alocada com malloc pode ser usada com colchetes [ ], igual um vetor normal."
+      },
+      {
+        type: "code",
+        instruction: "Troque malloc por calloc (calloc recebe quantidade e tamanho como dois argumentos separados, e já vem zerado).",
+        context_before: "#include <stdio.h>\n#include <stdlib.h>\n\nint main() {",
+        seed: "    int *numeros = malloc(5 * sizeof(int));",
+        target: "    int *numeros = calloc(5, sizeof(int));",
+        context_after: "\n    free(numeros);\n    return 0;\n}",
+        expectedOutput: null,
+        hint: "calloc(quantidade, tamanhoDeCadaUm) — sem multiplicação."
+      },
+      {
+        type: "mcq",
+        q: "Por que sempre usamos free() depois de malloc/calloc?",
+        options: [
+          "Pra liberar a memória alocada e evitar vazamento (memory leak)",
+          "É opcional e nunca importa",
+          "Apaga o programa inteiro",
+          "Só serve para variáveis float"
+        ],
+        answer: 0,
+        hint: "Memória não liberada fica 'presa' até o programa terminar.",
+        explain: "Sem free(), a memória alocada continua reservada mesmo sem uso — isso é um vazamento de memória (memory leak)."
+      }
+    ]
+  },
+
+  {
+    id: 21,
+    chapterRef: "6:43:23 no vídeo — “digital clock” (projeto final)",
+    title: "Projeto final: relógio digital",
+    icon: "⏰",
+    intro: `
+      <p>Pra pegar a hora atual, usamos <code>&lt;time.h&gt;</code>:</p>
+      <pre><code>time_t agora = time(NULL);
+struct tm *tempo = localtime(&agora);
+printf("%02d:%02d:%02d", tempo->tm_hour, tempo->tm_min, tempo->tm_sec);</code></pre>
+      <p><code>tempo</code> é um <b>ponteiro</b> pra struct, por isso usamos <code>-&gt;</code>
+      em vez de <code>.</code> pra acessar os campos. <code>%02d</code> imprime sempre com 2
+      dígitos (ex: 05 em vez de 5).</p>`,
+    phases: [
+      {
+        type: "code",
+        instruction: "Pegue o horário atual do sistema e guarde o resultado em tempo (um ponteiro pra struct tm).",
+        context_before: "#include <stdio.h>\n#include <time.h>\n\nint main() {",
+        seed: "",
+        target: "    time_t agora = time(NULL);\n    struct tm *tempo = localtime(&agora);",
+        context_after: "\n    return 0;\n}",
+        expectedOutput: null,
+        hint: "time(NULL) pega o instante atual; localtime converte pra hora/minuto/segundo."
+      },
+      {
+        type: "code",
+        instruction: "Imprima a hora atual (tm_hour) sempre com 2 dígitos.",
+        context_before: "#include <stdio.h>\n#include <time.h>\n\nint main() {\n    time_t agora = time(NULL);\n    struct tm *tempo = localtime(&agora);",
+        seed: "",
+        target: '    printf("%02d", tempo->tm_hour);',
+        context_after: "\n    return 0;\n}",
+        expectedOutput: null,
+        hint: "tempo->tm_hour porque tempo é um ponteiro — usamos -> em vez de ponto."
+      },
+      {
+        type: "code",
+        instruction: "Complete o printf pra montar o relógio completo no formato HH:MM:SS (hora, minuto, segundo).",
+        context_before: "#include <stdio.h>\n#include <time.h>\n\nint main() {\n    time_t agora = time(NULL);\n    struct tm *tempo = localtime(&agora);",
+        seed: "",
+        target: '    printf("%02d:%02d:%02d", tempo->tm_hour, tempo->tm_min, tempo->tm_sec);',
+        context_after: "\n    return 0;\n}",
+        expectedOutput: null,
+        hint: "Três %02d separados por dois pontos, na ordem hora, minuto, segundo."
+      },
+      {
+        type: "mcq",
+        q: "Por que usamos tempo->tm_hour em vez de tempo.tm_hour?",
+        options: [
+          "Porque tempo é um ponteiro pra struct, não a struct em si",
+          "Porque tm_hour é um campo privado",
+          "Não tem diferença nenhuma",
+          "Porque hour precisa ser maiúsculo"
+        ],
+        answer: 0,
+        hint: "localtime devolve um ponteiro (struct tm *tempo).",
+        explain: "-> é o atalho pra acessar campos quando você tem um PONTEIRO pra struct, em vez da struct direto."
+      }
+    ]
   }
 ];
 
 // Roadmap completo do curso (57 capítulos agrupados) — nós visíveis na trilha,
 // ainda não jogáveis. Vão virando sessões completas nas próximas atualizações.
-const ROADMAP = [
-  { title: "Projetos: carrinho & mad libs", icon: "🛒" },
-  { title: "Funções matemáticas & calculadoras", icon: "🧮" },
-  { title: "Números aleatórios & jogos", icon: "🎲" },
-  { title: "Vetores (arrays)", icon: "📊" },
-  { title: "Structs", icon: "⚙️" },
-  { title: "Ponteiros", icon: "📍" },
-  { title: "Arquivos", icon: "📁" },
-  { title: "malloc / calloc / realloc", icon: "🧠" },
-  { title: "Projeto final: relógio digital", icon: "⏰" }
-];
+// Trilha completa! Todos os 57 capítulos do curso viraram sessões jogáveis (1-21).
+const ROADMAP = [];

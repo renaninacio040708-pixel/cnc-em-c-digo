@@ -167,6 +167,15 @@ body {
   position: relative;
   z-index: 1;
 }
+.roadmap-divider.done {
+  color: var(--success);
+  font-size: 0.95rem;
+  background: #0d1a12;
+  border: 1px solid #1f4432;
+  border-radius: 14px;
+  padding: 16px;
+  margin: 20px 4px 4px;
+}
 
 .foot-note {
   text-align: center;

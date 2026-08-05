@@ -84,6 +84,13 @@ function renderMap() {
       </div>`;
   }).join("");
 
+  const allStarred3 = SESSIONS.every((s) => (state.stars[s.id] || 0) === 3);
+  const roadmapDivider = ROADMAP.length === 0
+    ? (allStarred3
+        ? `<div class="roadmap-divider done">🏆 Curso completo — 3 estrelas em tudo!</div>`
+        : `<div class="roadmap-divider done">🎉 Trilha completa! Volte pra fazer 3★ nas sessões que faltam.</div>`)
+    : `<div class="roadmap-divider">🚧 Próximos capítulos do curso</div>`;
+
   const roadmapNodes = ROADMAP.map((r, i) => {
     const side = (SESSIONS.length + i) % 3 === 0 ? "center" : ((SESSIONS.length + i) % 3 === 1 ? "left" : "right");
     return `
@@ -110,7 +117,7 @@ function renderMap() {
     <main class="trail">
       <div class="trail-line"></div>
       ${playableNodes}
-      <div class="roadmap-divider">🚧 Próximos capítulos do curso</div>
+      ${roadmapDivider}
       ${roadmapNodes}
     </main>
     <footer class="foot-note">Baseado no curso "C Programming Full Course" · progresso salvo neste dispositivo.</footer>
