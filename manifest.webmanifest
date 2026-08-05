@@ -1,0 +1,12 @@
+{
+  "name": "Aprenda C - Jogo",
+  "short_name": "Aprenda C",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0f1420",
+  "theme_color": "#0f1420",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
