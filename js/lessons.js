@@ -329,7 +329,7 @@ printf("Voce tem %d anos", idade);</code></pre>`,
       },
       {
         type: "code",
-        instruction: "Troque %d por %f e int por float, para ler um número decimal em vez de inteiro.",
+        instruction: "A variável já é float. Troque %d por %f no scanf, para ler um número decimal em vez de inteiro.",
         context_before: "#include <stdio.h>\n\nint main() {",
         seed: '    float peso;\n    scanf("%d", &peso);',
         target: '    float peso;\n    scanf("%f", &peso);',
