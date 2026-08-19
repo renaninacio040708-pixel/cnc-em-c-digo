@@ -1,11 +1,12 @@
 {
-  "name": "Aprenda C - Jogo",
-  "short_name": "Aprenda C",
+  "name": "Centro de Usinagem CNC — O Jogo",
+  "short_name": "Usinagem CNC",
+  "description": "Jogo de treino para programar centro de usinagem CNC: coordenadas X/Y/Z, G-code e ciclos de furação.",
   "start_url": "index.html",
   "display": "standalone",
-  "background_color": "#0f1420",
-  "theme_color": "#0f1420",
-  "orientation": "portrait",
+  "background_color": "#0d1117",
+  "theme_color": "#0d1117",
+  "orientation": "any",
   "icons": [
     { "src": "icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ]
